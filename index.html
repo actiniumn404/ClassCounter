@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>ClassCounter</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" href="favicon.png">
+    <link rel="stylesheet" href="styles/index.css">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">-->
+    <link rel="stylesheet" href="lib/fontawesome/css/all.css">
+</head>
+<body>
+    <nav>
+        <div id="nav__logo">ClassCounter</div>
+    </nav>
+    <div id="page_title">Edit Classes</div>
+    <section id="classes">
+        <aside id="class-list"></aside>
+        <main id="class-editing"> <!-- abbrev "edit" --->
+            <div id="edit__title">
+                <div class="edit__icon"><i class=""></i></div>
+                <div>
+                    <div class="edit__name"></div>
+                    <div class="edit__data"></div>
+                </div>
+            </div>
+            <div class="edit__tools">
+                <button id="sort__first_name">Sort by First Name</button>
+                <button id="sort__last_name">Sort by Last Name</button>
+            </div>
+            <div class="edit__students">
+                <button id="add_student"><i class="fa-solid fa-pen-to-square"></i> Add Student</button>
+            </div>
+        </main>
+    </section>
+
+    <template id="template__class">
+        <div class="class-list__item">
+            <div class="class-list__item__icon"><i class=""></i></div>
+            <div class="class-list__item__name">NAME</div>
+        </div>
+    </template>
+
+    <template id="template__student__new">
+        <div class="student student__new">
+            <input placeholder="Student Name" spellcheck="false">
+            <button class="student__complete"><i class="fa-solid fa-check"></i></button>
+        </div>
+    </template>
+
+    <template id="template__student">
+        <div class="student">
+            <span>NAME</span>
+            <div class="student__delete"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+    </template>
+
+    <template id="template__input">
+        <div class="modal__wrapper">
+            <div class="modal">
+                <div class="title"><span class="title-text"></span> <i class="fa-solid fa-xmark title-close"></i></div>
+                <div class="desc"></div>
+                <input class="input">
+                <button class="submit">Submit</button>
+            </div>
+        </div>
+    </template>
+
+    <script src="scripts/index.js" defer></script>
+</body>
+</html>

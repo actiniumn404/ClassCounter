@@ -1,0 +1,309 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root{
+    --width: 1000px;
+    --background: #CAF0F8;
+    --intense-background: #90E0EF;
+    --highlight: #00B4D8;
+    --darker-highlight: #0077B6;
+    --dark: #03045E;
+}
+
+*, *::before, *::after{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Roboto, sans-serif;
+    background: var(--background);
+    margin: 0;
+}
+
+nav{
+    width: 100%;
+    background: var(--intense-background);
+    padding: 20px calc((100% - var(--width)) / 2);
+}
+
+div#nav__logo{
+    font-weight: bolder;
+    font-size: 18px;
+}
+
+#page_title{
+    width: var(--width);
+    margin: auto;
+    font-size: 36px;
+    font-weight: 300;
+    padding: 20px 0;
+}
+
+#classes{
+    width: var(--width);
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    height: calc(100vh - 200px);
+}
+
+#class-list{
+    width: 300px;
+    padding: 0;
+    height: 100%;
+    background: white;
+}
+
+#class-list .class-list__item{
+    display: flex;
+    flex-direction: row;
+    padding: 7px 20px;
+    align-items: center;
+    column-gap: 5px;
+    cursor: pointer;
+}
+
+#class-list .class-list__item:first-child{
+    padding-top: 17px;
+}
+
+#class-list .class-list__item:hover{
+    background: whitesmoke;
+}
+
+.class-list__item .class-list__item__icon{
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    color: var(--darker-highlight);
+    width: 30px;
+    justify-content: center;
+}
+
+#class-editing{
+    background: white;
+    height: 100%;
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.edit__icon{
+    color: var(--darker-highlight);
+    font-size: 50px;
+    cursor: pointer;
+}
+
+.edit__icon:hover{
+    color: var(--highlight);
+}
+
+.edit__name{
+    cursor: pointer;
+}
+
+.edit__name:hover{
+    background: whitesmoke;
+}
+
+#edit__title{
+    font-size: 24px;
+    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 5px;
+}
+
+.edit__students{
+    background: whitesmoke;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 7px;
+    overflow-y: scroll;
+}
+
+.student{
+    padding: 7px 10px;
+    background: white;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    user-select: none;
+}
+
+.student.move{
+    position: relative;
+    background: var(--background);
+}
+
+.student:not(:hover) .student__delete{
+    color: transparent;
+}
+
+.student__delete{
+    color: red;
+}
+
+.student__delete:hover{
+    transform: scale(1.3);
+    cursor: pointer;
+}
+
+.student__new{
+    display: flex;
+    column-gap: 10px;
+}
+
+.student__new input{
+    border-width: 0 0 1px 0;
+    outline: none;
+    font-size: 16px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.student__new input:focus{
+    border-width:  0 0 2px 0;
+}
+
+.student__new input::placeholder{
+    font-style: italic;
+    color: lightgray;
+}
+
+.edit__students:has(.student__new) #add_student{
+    display: none;
+}
+
+#add_student{
+    padding: 10px 10px;
+    background: var(--background);
+    font-size: 16px;
+    text-align: center;
+    border: none;
+    color: black;
+    font-weight: bolder;
+    cursor: pointer;
+    transition: 0.2s;
+    order: 1000000;
+}
+
+#add_student:hover{
+    opacity: 0.8;
+}
+
+#add_student:active{
+    opacity: 0.5;
+}
+
+.student__complete{
+    background: none;
+    border: 0;
+    width: fit-content;
+    padding: 0;
+    color: green;
+    cursor: pointer;
+}
+
+.student__complete:hover{
+    transform: scale(1.3);
+}
+
+.edit__data{
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.edit__tools button{
+    color: var(--darker-highlight);
+    background: whitesmoke;
+    border: 0;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: bolder;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.edit__tools button:hover{
+    background: #e3e3e3;
+}
+
+.modal__wrapper{
+    position: fixed;
+    background: rgba(0, 0, 0, 0.6);
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+}
+
+.modal{
+    width: calc(var(--width) - 30px);
+    background: white;
+    margin: 50px auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+.modal .title{
+    font-weight: 600;
+    font-size: 24px;
+    display: flex;
+    column-gap: 5px;
+}
+
+.modal .desc{
+    font-size: 16px;
+}
+
+.modal .input{
+    width: 100%;
+    font-size: 16px;
+    padding: 5px 10px;
+    outline: none;
+    border: 1px solid black;
+}
+
+.modal .submit{
+    background: var(--darker-highlight);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bolder;
+    transition: 0.2s;
+    width: fit-content;
+}
+
+.modal .submit:hover{
+    opacity: 0.8;
+}
+
+.modal .submit:active{
+    opacity: 0.5;
+}
+
+.modal .title-close{
+    color: red;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: var(--darker-highlight);
+    font-weight: 500;
+}
+
+a:hover{
+    text-decoration: underline;
+}
