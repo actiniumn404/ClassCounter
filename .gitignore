@@ -3,5 +3,5 @@ lib/fontawesome/less
 lib/fontawesome/metadata
 lib/fontawesome/scss
 lib/fontawesome/sprites
-lib/fontawesome/webfonts
+lib/fontawesome/svgs
 lib/fontawesome/LICENSE.txt
