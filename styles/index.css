@@ -235,6 +235,15 @@ div#nav__logo{
     background: #e3e3e3;
 }
 
+#delete_class{
+    background: lightcoral;
+    color: white;
+}
+
+#delete_class:hover{
+    background: palevioletred;
+}
+
 .modal__wrapper{
     position: fixed;
     background: rgba(0, 0, 0, 0.6);
@@ -273,7 +282,7 @@ div#nav__logo{
     border: 1px solid black;
 }
 
-.modal .submit{
+.modal .submit, .modal .options *{
     background: var(--darker-highlight);
     color: white;
     padding: 10px 20px;
@@ -306,4 +315,25 @@ a {
 
 a:hover{
     text-decoration: underline;
+}
+
+#add_course{
+    margin: 7px 20px;
+    width: calc(100% - 40px);
+    padding: 10px 0;
+    border: 0;
+    border-radius: 4px;
+    background: var(--background);
+    font-weight: bolder;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#add_course:hover{
+    opacity: 0.8;
+}
+
+#add_course:active{
+    opacity: 0.5;
 }

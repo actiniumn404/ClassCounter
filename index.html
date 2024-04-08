@@ -27,6 +27,7 @@
             <div class="edit__tools">
                 <button id="sort__first_name">Sort by First Name</button>
                 <button id="sort__last_name">Sort by Last Name</button>
+                <button id="delete_class">Delete Class</button>
             </div>
             <div class="edit__students">
                 <button id="add_student"><i class="fa-solid fa-pen-to-square"></i> Add Student</button>
@@ -64,6 +65,23 @@
                 <button class="submit">Submit</button>
             </div>
         </div>
+    </template>
+
+    <template id="template__are_you_sure">
+        <div class="modal__wrapper">
+            <div class="modal">
+                <div class="title"><span class="title-text"></span> <i class="fa-solid fa-xmark title-close"></i></div>
+                <div class="desc"></div>
+                <div class="options">
+                    <button class="affirm">Yes</button>
+                    <button class="negate">No</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="template_add_course">
+        <button id="add_course"><i class="fa-solid fa-pen-to-square"></i> Add Course</button>
     </template>
 
     <script src="scripts/index.js" defer></script>

@@ -141,7 +141,12 @@ class Client {
     }
 
     load(port = this.#port) {
-        let data = JSON.parse(localStorage[port] ?? {})
+        let data;
+        try{
+            data = JSON.parse(localStorage[port])
+        }catch{
+            data = ""
+        }
 
         for (let [name, course] of Object.entries(data)){
             this.courses.push(new Course(name, course.icon, course.id, new Roster(course.roster.map(e => new Student(e)), this), this))
@@ -164,6 +169,15 @@ class Client {
 
             index += 1
         }
+
+        let add = document.getElementById("template_add_course").content.cloneNode(true)
+        document.getElementById("class-list").append(add)
+    }
+
+    renumber_courses() {
+        for (let i = 0; i < this.courses.length; i++){
+            this.courses[i].id = i
+        }
     }
 
     load_course(index){
@@ -179,6 +193,18 @@ class Client {
 
         localStorage[port] = JSON.stringify(res)
         return localStorage[port]
+    }
+
+    add_course() {
+        let count = 0
+        for (let course of this.courses){
+            if (course.name.startsWith("Untitled Class")){
+                count += 1
+            }
+        }
+        this.courses.push(new Course(`Untitled Class (${count + 1})`, "fa-solid fa-book", this.courses.length, new Roster([], this), this))
+        CLIENT.load_courses()
+        CLIENT.save()
     }
 }
 
@@ -267,6 +293,17 @@ let events = {
                     return
                 }
 
+                if (CLIENT.CURCLASS.name === promise){
+                    return
+                }
+
+                for (let course of CLIENT.courses){
+                    if (course.name === promise){
+                        alert("Name change failed. Names cannot be repeated;")
+                        return
+                    }
+                }
+
                 CLIENT.CURCLASS.name = promise
                 CLIENT.save()
                 CLIENT.load_courses()
@@ -289,6 +326,38 @@ let events = {
                 CLIENT.save()
                 CLIENT.load_courses()
                 CLIENT.CURCLASS.display()
+            }
+        },
+        {
+            "check": factory.is_id("add_course"),
+            "action": () => {
+                CLIENT.add_course()
+            }
+        },
+        {
+            "check": factory.is_id("delete_class"),
+            "action": async () => {
+                let promise
+                try {
+                    promise = await areyousure(`Are you sure you want to delete ${CLIENT.CURCLASS.name}?`,
+                        "You CANNOT revert this action.", {
+                            "text": "Yes, I am sure.",
+                            "style": "background: var(--intense-background)"
+                        },
+                        {"text": "No, please go back.", "style": "background: #097969;"})
+                }catch{
+                    return
+                }
+
+                CLIENT.courses.splice(CLIENT.CURCLASS.id, 1)
+                CLIENT.renumber_courses()
+                CLIENT.save()
+                CLIENT.load_courses()
+                try{
+                    CLIENT.load_course(0)
+                }catch{
+                    CLIENT.add_course()
+                }
             }
         }
     ],
@@ -477,6 +546,52 @@ const ask = (title, description, attributes) => {
 
 }
 
+const areyousure = (title, description, affirm, negate) => {
+    let element = document.querySelector("#template__are_you_sure").content.cloneNode(true)
+    element.querySelector(".title-text").innerHTML = title
+    element.querySelector(".desc").innerHTML = description
+
+    if (!description){
+        element.querySelector(".desc").remove()
+    }
+
+    for (let attr in affirm){
+        element.querySelector(".affirm").setAttribute(attr, affirm[attr])
+    }
+    element.querySelector(".affirm").innerText = affirm.text ?? "Yes"
+
+    for (let attr in negate){
+        element.querySelector(".negate").setAttribute(attr, negate[attr])
+    }
+
+    element.querySelector(".negate").innerText = negate.text ?? "No"
+
+    document.body.append(element)
+
+    return new Promise((resolve, reject) => {
+        document.querySelector(".modal .affirm").onclick = () => {
+            document.querySelector(".modal__wrapper").remove()
+            resolve()
+        }
+
+        document.querySelector(".modal .negate").onclick = () => {
+            document.querySelector(".modal__wrapper").remove()
+            reject()
+        }
+
+        document.querySelector(".modal .title-close").onclick = () => {
+            document.querySelector(".modal__wrapper").remove()
+            reject()
+        }
+    });
+
+}
+
 let CLIENT = new Client("data")
 CLIENT.load()
+
+if (!(CLIENT.courses.length)){
+    CLIENT.add_course()
+}
+
 CLIENT.load_course(0)
