@@ -298,3 +298,30 @@ a:hover{
 #add_course:active{
     opacity: 0.5;
 }
+
+@media (max-width: 780px){
+    #classes{
+        flex-direction: column;
+        row-gap: 10px;
+    }
+
+    #class-list{
+        min-height: 100px;
+        max-height: 300px;
+        width: 100%;
+        flex: 1;
+    }
+
+    #class-editing{
+        overflow-y: auto;
+    }
+
+    #class-editing:focus{
+        flex: 1;
+    }
+
+    #classes:has(#class-editing:focus, #class-editing:focus-within) #class-list{
+        flex: auto;
+        max-height: 70px;
+    }
+}

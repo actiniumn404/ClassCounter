@@ -2,21 +2,42 @@
     width: var(--width);
     margin: auto;
     display: flex;
-    flex-direction: row;
-    column-gap: 10px;
+    flex-direction: column;
+    row-gap: 10px;
     height: calc(100vh - 200px);
 }
 
 #results_options{
-    width: 300px;
+    width: 100%;
     padding: 20px;
-    height: 100%;
+    height: fit-content;
     background: white;
 }
 
+#results_options.min #options_include{
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+    border: 0;
+}
+
+#results_options.min :is(.options_subheader, #options_select){
+    margin: 0;
+    height: 0;
+    border: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#results_options.min #go{
+    margin-top: 0;
+}
+
+
+
 #results{
     background: white;
-    height: 100%;
+    overflow: auto;
     flex: 1;
     padding: 20px;
     display: flex;
@@ -27,12 +48,14 @@
 #options_header{
     font-weight: bold;
     font-size: 20px;
+    cursor: pointer;
+    user-select: none;
 }
 
 #options_include{
     border: 1px solid black;
     padding: 10px;
-    max-height: calc(100% - 400px);
+    max-height: 400px;
     overflow-y: scroll;
 }
 
@@ -67,7 +90,7 @@
     outline: none;
 }
 
-#go{
+#go, #download{
     background: var(--darker-highlight);
     color: white;
     font-weight: bold;
@@ -80,10 +103,20 @@
     cursor: pointer;
 }
 
-#go:hover{
+#go:hover, #download:hover{
     opacity: 0.8;
 }
 
-#go:active{
+#go:active, #download:active{
     opacity: 0.5;
+}
+
+#container{
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+#download{
+    display: none;
 }

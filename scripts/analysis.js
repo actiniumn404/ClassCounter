@@ -106,7 +106,7 @@ const create_document = (data, extra) => {
                                 relativeTo: docx.PositionalTabRelativeTo.MARGIN,
                                 leader: docx.PositionalTabLeader.DOT,
                             }),
-                            `(${student[1].join(", ")})`,
+                            ` (${student[1].join(", ")})`,
                         ],
                     }),
                 ],
@@ -182,7 +182,18 @@ const create_document = (data, extra) => {
     // Create a mime type that will associate the new file with Microsoft Word
     const mimeType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
     docx.Packer.toBlob(doc).then(blob => {
-        const docblob = blob.slice(0, blob.size, mimeType)
-        saveAs(docblob, "test.docx")
+        docPreview.renderAsync(blob, document.getElementById("container"), null, {ignoreWidth: false})
+            .then(x => console.log("docx: finished"));
+
+        document.getElementById("download").style.display = "block"
+        document.getElementById("download").onclick = () => {
+            saveAs(blob, "Class Comparison.docx")
+        }
     })
+}
+
+document.querySelector("#options_header").onclick = () => {
+    document.querySelector("#options_header i").classList.toggle("fa-angle-right")
+    document.querySelector("#options_header i").classList.toggle("fa-angle-down")
+    document.querySelector("#results_options").classList.toggle("min")
 }

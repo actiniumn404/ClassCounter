@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="styles/analysis.css">
     <link rel="stylesheet" href="lib/fontawesome/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js" defer></script>
+    <script type="text/javascript" src="https://unpkg.com/jszip/dist/jszip.min.js"> defer</script>
+    <script type="text/javascript" src="scripts/docx-preview.min.js" defer></script>
 </head>
 <body>
     <nav>
@@ -18,7 +20,7 @@
     <div id="page_title">Analyze Classes</div>
     <section id="results_wrapper">
         <aside id="results_options">
-            <div id="options_header">Options</div>
+            <div id="options_header"><i class="fa-solid fa-angle-down"></i> Options</div>
             <div class="options_subheader">Include Classes:</div>
             <div id="options_include"></div>
 
@@ -29,8 +31,10 @@
                 <option>Icon</option>
             </select>
             <button id="go">Go!</button>
+            <button id="download"><i class="fa-solid fa-file-arrow-down"></i> Download Word File</button>
         </aside>
         <main id="results"> <!-- abbrev "edit" --->
+            <div id="container">Your results will show here.</div>
         </main>
     </section>
 
@@ -42,6 +46,6 @@
     </template>
 
     <script src="scripts/data.js" defer></script>
-    <script src="scripts/analysis.js" defer></script>
+    <script src="scripts/analysis.js" type="module" defer></script>
 </body>
 </html>
