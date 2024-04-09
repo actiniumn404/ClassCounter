@@ -22,12 +22,21 @@ body{
 nav{
     width: 100%;
     background: var(--intense-background);
-    padding: 20px calc((100% - var(--width)) / 2);
+    padding: 10px calc((100% - var(--width)) / 2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 div#nav__logo{
     font-weight: bolder;
     font-size: 18px;
+    color: black;
+    background: white;
+    padding: 7px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 #page_title{
@@ -36,6 +45,18 @@ div#nav__logo{
     font-size: 36px;
     font-weight: 300;
     padding: 20px 0;
+}
+
+#nav__right{
+    display: flex;
+    column-gap: 30px;
+    font-size: 18px;
+}
+
+nav a{
+    color: var(--dark);
+    font-weight: bold;
+    text-decoration: none !important;
 }
 
 @media (max-width: 1020px){
