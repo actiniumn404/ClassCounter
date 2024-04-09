@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>ClassCounter</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" href="favicon.png">
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/analysis.css">
+    <link rel="stylesheet" href="lib/fontawesome/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.min.js"></script>
+    <script src="http://cdn.jsdelivr.net/g/filesaver.js"></script>
+</head>
+<body>
+    <nav>
+        <div id="nav__logo">ClassCounter</div>
+    </nav>
+    <div id="page_title">Analyze Classes</div>
+    <section id="results_wrapper">
+        <aside id="results_options">
+            <div id="options_header">Options</div>
+            <div class="options_subheader">Include Classes:</div>
+            <div id="options_include"></div>
+
+            <div class="options_subheader">Display Classes with:</div>
+            <select id="options_select">
+                <option selected>Name</option>
+                <option>Number</option>
+                <option>Icon</option>
+            </select>
+            <button id="go">Go!</button>
+        </aside>
+        <main id="results"> <!-- abbrev "edit" --->
+        </main>
+    </section>
+
+    <template id="template__course">
+        <div class="option">
+            <input type="checkbox" id="" checked name>
+            <label for=""><span>Algebra 2</span> <i class="fa-fw"></i></label>
+        </div>
+    </template>
+
+    <script src="scripts/data.js" defer></script>
+    <script src="scripts/analysis.js" defer></script>
+</body>
+</html>
