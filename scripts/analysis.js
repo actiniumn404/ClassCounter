@@ -18,18 +18,28 @@ const init = () => {
 
 init()
 
-const process = (classes) => { // list of ids
+const process = (classes, style="Name") => { // list of ids
     let students = {}
     let max_shared = 0
 
+    let map = []
+
+    let i = 1;
     for (let course_id of classes){
         let course = CLIENT.courses[course_id]
         for (let student of course.roster.roster){
             if (!students.hasOwnProperty(student.name)){
                 students[student.name] = []
             }
-            students[student.name].push(course.name)
+            if (style === "Name"){
+                students[student.name].push(course.name)
+            }else{
+                students[student.name].push(i)
+            }
+
         }
+        map.push(new docx.Paragraph({text: `${i}: ${course.name}`}))
+        i += 1
     }
 
     let shared = {}
@@ -55,7 +65,11 @@ const process = (classes) => { // list of ids
         })
     }
 
-    return shared_sorted
+    if (style === "Number"){
+        return [shared_sorted, map]
+    }
+
+    return [shared_sorted]
 }
 
 document.querySelector("#go").onclick = () => {
@@ -67,13 +81,12 @@ document.querySelector("#go").onclick = () => {
         req.push(Number(checkbox.getAttribute("name")))
     }
 
-    create_document(process(req))
+    create_document(...process(req, document.querySelector("#options_select").value))
 }
 
-const create_document = (data) => {
-    let paragraphs = []
+const create_document = (data, extra) => {
+    let paragraphs = extra ?? []
 
-    console.log(data)
     for (let [number, students] of data){
         paragraphs.push(
             new docx.Paragraph({
